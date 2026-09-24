@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { UserPen, CalendarCheck2, Tag } from "lucide-react";
 import { Post, PostIndex } from "@/core/domain/post";

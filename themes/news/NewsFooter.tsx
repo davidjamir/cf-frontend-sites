@@ -1,4 +1,4 @@
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import SocialBlock from "@/components/layout/SocialBlock"
 
 export default function NewFooter() {
