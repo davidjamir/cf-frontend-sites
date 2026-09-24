@@ -6,6 +6,7 @@ next-env.d.ts
 .vinext/
 .wrangler/
 .vscode/
+.DS_Store
 
 .dev.vars*
 !.dev.vars.example
