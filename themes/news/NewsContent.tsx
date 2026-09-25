@@ -225,11 +225,11 @@ export function NewsContent({
 export function NewsPostPage({
     post,
     related,
-    isDevelopment
+    isProduction
 }: {
     post: Post;
     related: PostIndex[];
-    isDevelopment: boolean;
+    isProduction: boolean;
 }) {
     const { site } = useSite();
 
@@ -237,7 +237,7 @@ export function NewsPostPage({
         <div className="w-full grid grid-cols-1 md:grid-cols-[180px_1fr_180px] lg:grid-cols-[200px_1fr_200px] gap-4">
             {/* SIDERBAR LEFT */}
             <aside className="hidden md:block">
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsLeftSidebar.length > 0 &&
                     site.ads.adsScript.adsLeftSidebar.filter(ad => ad.enabled).map((ad) => (
@@ -250,7 +250,7 @@ export function NewsPostPage({
             {/* MAIN ARTICLE */}
             <div className="w-full px-2 border border-gray-200/5 shadow-sm rounded-md">
                 {/* BEFORE POST ADS */}
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsBody?.beforePost?.enabled &&
                     site.ads.adsScript.adsBody?.beforePost?.content && (
@@ -299,7 +299,7 @@ export function NewsPostPage({
                 )}
 
                 {/* UNDER POST ADS */}
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsBody?.afterPost?.enabled &&
                     site.ads.adsScript.adsBody?.afterPost?.content && (
@@ -314,7 +314,7 @@ export function NewsPostPage({
 
             {/* SIDERBAR RIGHT */}
             <aside className="hidden md:block">
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsRightSidebar.length > 0 &&
                     site.ads.adsScript.adsRightSidebar.filter(ad => ad.enabled).map((ad) => (

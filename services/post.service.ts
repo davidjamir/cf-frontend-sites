@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from "next/cache";
 import {
-  isDevelopment,
+  isProduction,
   WORKER_R2_DATABASE,
   INTERNAL_SECRET,
   ADAPTER_API_ENDPOINT,
@@ -25,7 +25,7 @@ export const postService = {
         },
       );
 
-      const response: Response = isDevelopment
+      const response: Response = !isProduction
         ? await fetch(request)
         : await WORKER_R2_DATABASE.fetch(request);
 
@@ -113,7 +113,7 @@ export const postService = {
         headers: { Authorization: `Bearer ${INTERNAL_SECRET}` },
       });
 
-      const response: Response = isDevelopment
+      const response: Response = !isProduction
         ? await fetch(request)
         : await WORKER_R2_DATABASE.fetch(request);
 

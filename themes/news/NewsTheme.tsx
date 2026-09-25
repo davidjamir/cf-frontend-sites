@@ -5,13 +5,13 @@ import NewsFooter from "./NewsFooter";
 import { Separator } from "@/components/ui/separator";
 import AdBlock from "@/components/layout/AdBlock";
 
-export default function NewsTheme({ children, isDevelopment }: { children: React.ReactNode; isDevelopment: boolean }) {
+export default function NewsTheme({ children, isProduction }: { children: React.ReactNode; isProduction: boolean }) {
     const { site } = useSite();
 
     return (
         <div className="min-h-screen flex flex-col overflow-hidden">
             {/* ADS VIDEO HEADER*/}
-            {!isDevelopment &&
+            {isProduction &&
                 site.config.enabledAds &&
                 site.ads.adsScript.adsVideoHeader.enabled &&
                 site.ads.adsScript.adsVideoHeader.content && (
@@ -34,7 +34,7 @@ export default function NewsTheme({ children, isDevelopment }: { children: React
 
             {/* SCRIPTS ADS HEADER */}
             <div className=" w-full min-h-1">
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsHeader.length > 0 &&
                     site.ads.adsScript.adsHeader.filter(ad => ad.enabled).map((ad) => (
@@ -50,7 +50,7 @@ export default function NewsTheme({ children, isDevelopment }: { children: React
 
             {/* SCRIPTS ADS FOOTER */}
             <div className=" w-full min-h-1">
-                {!isDevelopment &&
+                {isProduction &&
                     site.config.enabledAds &&
                     site.ads.adsScript.adsFooter.length > 0 &&
                     site.ads.adsScript.adsFooter.filter(ad => ad.enabled).map((ad) => (

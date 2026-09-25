@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { headers } from "next/headers";
-import { isDevelopment, WORKER_R2_DATABASE, INTERNAL_SECRET } from "@/lib/env";
+import { isProduction, WORKER_R2_DATABASE, INTERNAL_SECRET } from "@/lib/env";
 import { ORIGIN_CONFIG_DEVELOPMENT_DEFAULT } from "@/constants";
 import type { Site } from "@/core/domain/site";
 
@@ -14,7 +14,7 @@ async function fetchSite(baseUrl: string) {
       headers: { Authorization: `Bearer ${INTERNAL_SECRET}` },
     });
 
-    const response: Response = isDevelopment
+    const response: Response = !isProduction
       ? await fetch(request)
       : await WORKER_R2_DATABASE.fetch(request);
 
@@ -39,7 +39,7 @@ export const siteService = {
     }
 
     // Checking environment app
-    if (isDevelopment || host.startsWith("localhost")) {
+    if (!isProduction || host.startsWith("localhost")) {
       return ORIGIN_CONFIG_DEVELOPMENT_DEFAULT();
     }
 

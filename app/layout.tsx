@@ -2,7 +2,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { isDevelopment } from "@/lib/env";
+import { isProduction } from "@/lib/env";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { ThemeProvider } from "@/providers/theme.provider";
@@ -39,6 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
         "application/rss+xml": "/feed",
       },
     },
+    icons: {
+      icon: { url: site.icon, type: "image/png", sizes: "32x32" },
+      apple: { url: site.icon, type: "image/png", sizes: "180x180" },
+    },
     robots: {
       index: true,
       follow: true,
@@ -65,13 +69,13 @@ async function SiteBoundary({
 
   return (
     <>
-      {!isDevelopment && site.analytics?.gaId && (
+      {isProduction && site.analytics?.gaId && (
         <GoogleAnalytics gaId={site.analytics.gaId} />
       )}
-      {!isDevelopment && site.analytics?.gtmId && (
+      {isProduction && site.analytics?.gtmId && (
         <GoogleTagManager gtmId={site.analytics.gtmId} />
       )}
-      {!isDevelopment &&
+      {isProduction &&
         site.config.enabledAds &&
         site.script.length > 0 &&
         site.script
@@ -95,7 +99,7 @@ async function SiteBoundary({
             );
           })}
       <ThemeProvider site={site}>
-        <ThemeLayout isDevelopment={isDevelopment}>{children}</ThemeLayout>
+        <ThemeLayout isProduction={isProduction}>{children}</ThemeLayout>
       </ThemeProvider>
     </>
   );
