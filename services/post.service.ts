@@ -1,4 +1,4 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import {
   isDevelopment,
   WORKER_R2_DATABASE,
@@ -13,6 +13,8 @@ export const postService = {
   async getPostData(baseUrl: string, segment: string, slug: string) {
     "use cache";
     cacheLife("max");
+    cacheTag(`post-data:${baseUrl}/${segment}/${slug}`);
+
     try {
       const searchParams = new URLSearchParams({ segment, slug });
 
@@ -41,6 +43,7 @@ export const postService = {
   async getPostIndexByCategory(domain: string, category: string) {
     "use cache";
     cacheLife("hours");
+    cacheTag(`posts-index-category:${domain}:${category}`);
 
     try {
       const url = new URL("/api/category", ADAPTER_API_ENDPOINT);
@@ -72,6 +75,8 @@ export const postService = {
   async getPostIndexByTag(domain: string, tag: string) {
     "use cache";
     cacheLife("hours");
+    cacheTag(`posts-index-tag:${domain}:${tag}`);
+
     try {
       const url = new URL("/api/tag", ADAPTER_API_ENDPOINT);
       url.searchParams.set("domain", domain);
@@ -101,6 +106,7 @@ export const postService = {
   async getPostIndexLatest(baseUrl: string) {
     "use cache";
     cacheLife("hours");
+    cacheTag(`posts-index-latest:${baseUrl}`);
 
     try {
       const request = new Request(`${baseUrl}/api/latest`, {
@@ -136,6 +142,8 @@ export const postService = {
   ) {
     "use cache";
     cacheLife("days");
+    cacheTag(`posts-index-related:${domain}/${slug}`);
+
     try {
       const url = new URL("/api/related", ADAPTER_API_ENDPOINT);
       url.searchParams.set("domain", domain);

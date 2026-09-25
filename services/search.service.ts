@@ -1,8 +1,13 @@
+import { cacheLife, cacheTag } from "next/cache";
 import { ADAPTER_API_ENDPOINT, ADAPTER_SECRET_TOKEN } from "@/lib/env";
 import type { PostIndex } from "@/core/domain/post";
 
 export const searchService = {
   async searchPosts(domain: string, q: string) {
+    "use cache";
+    cacheLife("days");
+    cacheTag(`posts-search:${domain}:${q}`);
+
     try {
       const url = new URL("/api/search", ADAPTER_API_ENDPOINT);
       url.searchParams.set("domain", domain);

@@ -1,12 +1,13 @@
-import type { Site } from "@/core/domain/site";
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { headers } from "next/headers";
 import { isDevelopment, WORKER_R2_DATABASE, INTERNAL_SECRET } from "@/lib/env";
 import { ORIGIN_CONFIG_DEVELOPMENT_DEFAULT } from "@/constants";
+import type { Site } from "@/core/domain/site";
 
 async function fetchSite(baseUrl: string) {
   "use cache";
   cacheLife("days");
+  cacheTag(`site-config:${baseUrl}`);
 
   try {
     const request = new Request(`${baseUrl}/api/site`, {
