@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     unoptimized: false,
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "**",
+      },
+      {
         protocol: "https",
         hostname: "**",
       },
