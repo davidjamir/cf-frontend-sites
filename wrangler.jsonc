@@ -24,13 +24,13 @@
     "enabled": true,
   },
   "upload_source_maps": true,
-  "kv_namespaces": [
-    {
-      "binding": "VINEXT_KV_CACHE",
-      "id": "e1a42f2e511447d2a8c99e99a39c20c3",
-      "remote": true,
-    },
-  ],
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "VINEXT_KV_CACHE",
+  //     "id": "e1a42f2e511447d2a8c99e99a39c20c3",
+  //     "remote": true,
+  //   },
+  // ],
   "services": [
     {
       "binding": "WORKER_R2_DATABASE",
