@@ -9,3 +9,5 @@ This project was created with create-vinext-app.
 - `pnpm run start` starts the built Worker locally with Wrangler.
 - `pnpm run deploy` deploys the Cloudflare Worker.
 
+
+If error when get social poster, must be change endpoint by vps use tunnel, have configed domain valid. Just need connect vps server with tunnel.
