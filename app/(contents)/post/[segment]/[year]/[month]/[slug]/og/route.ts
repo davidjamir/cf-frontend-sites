@@ -24,7 +24,7 @@ export async function GET(_: Request, { params }: Props) {
     `${year}/${month}/${slug}`,
   );
 
-  const image = await fetch(post?.socialImage || post?.featuredImage);
+  const image = await fetch(post?.socialPoster || post?.featuredImage);
   return new Response(image.body, {
     headers: {
       "Content-Type": image.headers.get("content-type") ?? "image/webp",

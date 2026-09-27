@@ -4,7 +4,7 @@ export type Post = {
   slug: string;
   domain: string;
   featuredImage: string;
-  socialImage?: string;
+  socialPoster?: string;
   snippet: string;
   mainCategory: string;
   categories: string[];
@@ -21,7 +21,7 @@ export type PostIndex = {
   slug: string;
   domain: string;
   featuredImage: string;
-  socialImage?: string;
+  socialPoster?: string;
   snippet: string;
   mainCategory: string;
   categories: string[];
