@@ -25,7 +25,7 @@
     "enabled": true,
   },
   "cache": {
-    "enabled": false,
+    "enabled": true,
   },
   "upload_source_maps": true,
   // "kv_namespaces": [
