@@ -24,6 +24,9 @@
   "observability": {
     "enabled": true,
   },
+  "cache": {
+    "enabled": true,
+  },
   "upload_source_maps": true,
   // "kv_namespaces": [
   //   {
