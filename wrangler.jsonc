@@ -35,7 +35,7 @@
   "services": [
     {
       "binding": "WORKER_R2_DATABASE",
-      "service": "feed-redirect",
+      "service": "cf-storage-redirect",
     },
   ],
 }
