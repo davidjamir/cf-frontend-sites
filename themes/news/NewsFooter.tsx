@@ -52,18 +52,33 @@ export default function NewFooter() {
 
                         <ul className="mt-4 space-y-3">
                             {[
-                                "Home",
-                                "Latest",
-                                "Trending",
-                                "World",
-                                "Technology",
+                                {
+                                    label: "Home",
+                                    href: "/",
+                                },
+                                {
+                                    label: "Latest",
+                                    href: "/",
+                                },
+                                {
+                                    label: "Trending",
+                                    href: "/",
+                                },
+                                {
+                                    label: "World",
+                                    href: "/category/world",
+                                },
+                                {
+                                    label: "Technology",
+                                    href: "/category/technology",
+                                },
                             ].map((item) => (
-                                <li key={item}>
+                                <li key={item.label}>
                                     <a
-                                        href="#"
+                                        href={item.href}
                                         className="text-sm text-white/60 transition hover:text-white"
                                     >
-                                        {item}
+                                        {item.label}
                                     </a>
                                 </li>
                             ))}
@@ -77,17 +92,29 @@ export default function NewFooter() {
 
                         <ul className="mt-4 space-y-3">
                             {[
-                                "About",
-                                "Contact",
-                                "Careers",
-                                "Advertise",
+                                {
+                                    label: "About",
+                                    href: "/page/about",
+                                },
+                                {
+                                    label: "Contact",
+                                    href: "/page/contact-us",
+                                },
+                                {
+                                    label: "Careers",
+                                    href: "/page/careers",
+                                },
+                                {
+                                    label: "Advertise",
+                                    href: "/page/advertise",
+                                },
                             ].map((item) => (
-                                <li key={item}>
+                                <li key={item.label}>
                                     <a
-                                        href="#"
+                                        href={item.href}
                                         className="text-sm text-white/60 transition hover:text-white"
                                     >
-                                        {item}
+                                        {item.label}
                                     </a>
                                 </li>
                             ))}
@@ -101,17 +128,33 @@ export default function NewFooter() {
 
                         <ul className="mt-4 space-y-3">
                             {[
-                                "Privacy Policy",
-                                "Terms",
-                                "DMCA",
-                                "Cookies",
+                                {
+                                    label: "Privacy Policy",
+                                    href: "/page/privacy-policy",
+                                },
+                                {
+                                    label: "Terms of Use",
+                                    href: "/page/terms-and-conditions",
+                                },
+                                {
+                                    label: "Disclaimer",
+                                    href: "/page/disclaimer",
+                                },
+                                {
+                                    label: "Cookie Policy",
+                                    href: "/page/cookie-policy",
+                                },
+                                {
+                                    label: "DMCA / Copyright",
+                                    href: "/page/dmca-copyright",
+                                }
                             ].map((item) => (
-                                <li key={item}>
+                                <li key={item.label}>
                                     <a
-                                        href="#"
+                                        href={item.href}
                                         className="text-sm text-white/60 transition hover:text-white"
                                     >
-                                        {item}
+                                        {item.label}
                                     </a>
                                 </li>
                             ))}
@@ -129,16 +172,25 @@ export default function NewFooter() {
 
                 <div className="hidden md:flex md:flex-wrap items-center gap-x-5 gap-y-2">
                     {[
-                        "Editorial Policy",
-                        "Accessibility",
-                        "Sitemap",
+                        {
+                            label: "Editorial Policy",
+                            href: "/page/editorial-policy",
+                        },
+                        {
+                            label: "Accessibility",
+                            href: "/page/accessibility",
+                        },
+                        {
+                            label: "Sitemap",
+                            href: "/sitemap.xml",
+                        },
                     ].map((item) => (
                         <a
-                            key={item}
-                            href="#"
+                            key={item.label}
+                            href={item.href}
                             className="text-xs text-white/60 transition hover:text-white/80 sm:text-sm"
                         >
-                            {item}
+                            {item.label}
                         </a>
                     ))}
                 </div>
