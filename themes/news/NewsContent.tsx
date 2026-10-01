@@ -47,7 +47,7 @@ function NewsCardListItem({ post }: { post: PostIndex }) {
             {/* IMAGE LEFT */}
             <div className="relative z-20 w-30 md:w-65 lg:w-80 h-30 md:h-62 shrink-0 overflow-hidden pointer-events-none">
                 <Image
-                    src={post.featuredImage}
+                    src={post?.thumbnailImage || post.featuredImage}
                     alt={post.title}
                     fill
                     loading="eager"
@@ -144,7 +144,7 @@ function NewsCardGridItem({ post }: { post: PostIndex }) {
 
                 {/* IMAGE */}
                 <Image
-                    src={post.featuredImage}
+                    src={post?.thumbnailImage || post.featuredImage}
                     alt={post.title}
                     fill
                     loading="eager"

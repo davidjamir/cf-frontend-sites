@@ -2,14 +2,17 @@ import type { Category } from "@/core/domain/category";
 import type { Page } from "@/core/domain/page";
 
 export type SiteTheme =
+  | "news"
   | "team"
   | "sport"
   | "music"
-  | "news"
+  | "movie"
   | "nba"
   | "nfl"
   | "nhl"
-  | "mlb";
+  | "mlb"
+  | "football"
+  | "racing";
 
 export type SiteSeo = {
   title: string;

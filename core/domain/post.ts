@@ -4,6 +4,7 @@ export type Post = {
   slug: string;
   domain: string;
   featuredImage: string;
+  thumbnailImage?: string;
   socialPoster?: string;
   snippet: string;
   mainCategory: string;
@@ -21,6 +22,7 @@ export type PostIndex = {
   slug: string;
   domain: string;
   featuredImage: string;
+  thumbnailImage?: string;
   socialPoster?: string;
   snippet: string;
   mainCategory: string;
