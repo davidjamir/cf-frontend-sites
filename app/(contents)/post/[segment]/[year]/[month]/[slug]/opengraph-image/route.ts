@@ -29,6 +29,17 @@ export async function GET(_: Request, { params }: Props) {
     `${year}/${month}/${slug}`,
   );
 
+  if (!site.config.customOpengraphImage) {
+    const image = await fetch(post.featuredImage);
+    console.log("Image Featured");
+    return new Response(image.body, {
+      headers: {
+        "Content-Type": image.headers.get("content-type") ?? "image/webp",
+        "Cache-Control": "public, max-age=31536000, immutable",
+      },
+    });
+  }
+
   if (post?.socialPoster) {
     try {
       const data = await fetch(post?.socialPoster);
