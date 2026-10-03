@@ -15,11 +15,6 @@ type Props = {
   }>;
 };
 
-export const size = {
-  width: 1080,
-  height: 1350,
-};
-
 export async function GET(_: Request, { params }: Props) {
   const { segment, year, month, slug } = await params;
   const site = await siteService.getCurrentSite();
