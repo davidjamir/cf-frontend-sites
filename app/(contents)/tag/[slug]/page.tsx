@@ -15,15 +15,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const site = await siteService.getCurrentSite();
 
     return {
-        title: slug,
-        keywords: [slug],
+        title: decodeURIComponent(slug),
+        keywords: [decodeURIComponent(slug)],
         publisher: site.seo.title,
         openGraph: {
             siteName: site.seo.title,
             locale: "en_US",
             type: "website",
             url: `${site.baseUrl}/tag/${slug}`,
-            title: `${slug} | ${site.seo.title}`,
+            title: `${decodeURIComponent(slug)} | ${site.seo.title}`,
             description: site.seo.description,
             images: [{ url: "/images/default-banner.png", alt: site.seo.title }],
         },
