@@ -55,6 +55,6 @@
     },
   ],
   "vars": {
-    "IS_CRYPTO_PAYLOAD": false,
+    "IS_CRYPTO_PAYLOAD": true,
   },
 }
