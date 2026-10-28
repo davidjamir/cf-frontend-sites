@@ -1,6 +1,7 @@
 import { cacheLife, cacheTag } from "next/cache";
 import {
   isProduction,
+  isCrypto,
   WORKER_R2_DATABASE,
   INTERNAL_SECRET,
   ADAPTER_API_ENDPOINT,
@@ -35,8 +36,13 @@ export const postService = {
         throw new Error("Failed to get post data");
       }
 
-      const encryptedData: string = await response.text();
-      return decryptPacket<Post>(encryptedData, AES_SECRET_KEY);
+      if (isCrypto) {
+        const encryptedData: string = await response.text();
+        return decryptPacket<Post>(encryptedData, AES_SECRET_KEY);
+      }
+
+      const postData: Post = await response.json();
+      return postData;
     } catch (error) {
       console.error("[fetchPostData] ERROR:", error);
       throw error;
@@ -124,12 +130,21 @@ export const postService = {
         throw new Error("Failed to get post latest");
       }
 
-      const encryptedData: string = await response.text();
-      const data = await decryptPacket<{
+      let data;
+      if (isCrypto) {
+        const encryptedData: string = await response.text();
+        data = await decryptPacket<{
+          ok: boolean;
+          count: number;
+          items: PostIndex[];
+        }>(encryptedData, AES_SECRET_KEY);
+      }
+
+      data = (await response.json()) as {
         ok: boolean;
         count: number;
         items: PostIndex[];
-      }>(encryptedData, AES_SECRET_KEY);
+      };
 
       return data.items.slice(0, NUMBER_POSTS_LATEST) as PostIndex[];
     } catch (error) {

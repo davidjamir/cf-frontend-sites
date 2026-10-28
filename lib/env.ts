@@ -1,6 +1,7 @@
 // lib/env.ts
 import { env } from "cloudflare:workers";
 
+export const isCrypto = env.IS_CRYPTO_PAYLOAD;
 export const isProduction = env.APP_ENV === "production";
 export const ADAPTER_API_ENDPOINT = env.ADAPTER_API_ENDPOINT;
 export const ADAPTER_SECRET_TOKEN = env.ADAPTER_SECRET_TOKEN;

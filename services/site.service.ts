@@ -2,6 +2,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { headers } from "next/headers";
 import {
   isProduction,
+  isCrypto,
   WORKER_R2_DATABASE,
   INTERNAL_SECRET,
   AES_SECRET_KEY,
@@ -28,8 +29,13 @@ async function fetchSite(baseUrl: string) {
       throw new Error("Failed to get current site");
     }
 
-    const encryptedData: string = await response.text();
-    return decryptPacket<Site>(encryptedData, AES_SECRET_KEY);
+    if (isCrypto) {
+      const encryptedData: string = await response.text();
+      return decryptPacket<Site>(encryptedData, AES_SECRET_KEY);
+    }
+
+    const siteData: Site = await response.json();
+    return siteData;
   } catch (error) {
     console.error("[fetchSite] ERROR:", error);
     throw error;
