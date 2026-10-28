@@ -5,7 +5,9 @@ import {
   INTERNAL_SECRET,
   ADAPTER_API_ENDPOINT,
   ADAPTER_SECRET_TOKEN,
+  AES_SECRET_KEY,
 } from "@/lib/env";
+import { decryptPacket } from "@/lib/decrypt";
 import { NUMBER_POSTS_LATEST } from "@/constants";
 import type { Post, PostIndex } from "@/core/domain/post";
 
@@ -33,7 +35,8 @@ export const postService = {
         throw new Error("Failed to get post data");
       }
 
-      return response.json() as Promise<Post>;
+      const encryptedData: string = await response.text();
+      return decryptPacket<Post>(encryptedData, AES_SECRET_KEY);
     } catch (error) {
       console.error("[fetchPostData] ERROR:", error);
       throw error;
@@ -121,12 +124,12 @@ export const postService = {
         throw new Error("Failed to get post latest");
       }
 
-      //Specific for R2 response structure
-      const data = (await response.json()) as {
+      const encryptedData: string = await response.text();
+      const data = await decryptPacket<{
         ok: boolean;
         count: number;
         items: PostIndex[];
-      };
+      }>(encryptedData, AES_SECRET_KEY);
 
       return data.items.slice(0, NUMBER_POSTS_LATEST) as PostIndex[];
     } catch (error) {

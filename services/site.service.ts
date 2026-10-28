@@ -1,6 +1,12 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { headers } from "next/headers";
-import { isProduction, WORKER_R2_DATABASE, INTERNAL_SECRET } from "@/lib/env";
+import {
+  isProduction,
+  WORKER_R2_DATABASE,
+  INTERNAL_SECRET,
+  AES_SECRET_KEY,
+} from "@/lib/env";
+import { decryptPacket } from "@/lib/decrypt";
 import { ORIGIN_CONFIG_DEVELOPMENT_DEFAULT } from "@/constants";
 import type { Site } from "@/core/domain/site";
 
@@ -22,7 +28,8 @@ async function fetchSite(baseUrl: string) {
       throw new Error("Failed to get current site");
     }
 
-    return response.json() as Promise<Site>;
+    const encryptedData: string = await response.text();
+    return decryptPacket<Site>(encryptedData, AES_SECRET_KEY);
   } catch (error) {
     console.error("[fetchSite] ERROR:", error);
     throw error;
