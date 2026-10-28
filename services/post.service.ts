@@ -141,18 +141,19 @@ export const postService = {
       let data;
       if (isCrypto) {
         const encryptedData: string = await response.text();
+        
         data = await decryptPacket<{
           ok: boolean;
           count: number;
           items: PostIndex[];
         }>(encryptedData, AES_SECRET_KEY);
+      } else {
+        data = (await response.json()) as {
+          ok: boolean;
+          count: number;
+          items: PostIndex[];
+        };
       }
-
-      data = (await response.json()) as {
-        ok: boolean;
-        count: number;
-        items: PostIndex[];
-      };
 
       return data.items.slice(0, NUMBER_POSTS_LATEST) as PostIndex[];
     } catch (error) {
