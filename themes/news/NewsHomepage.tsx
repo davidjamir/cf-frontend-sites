@@ -8,7 +8,7 @@ export async function NewsHomePage({ site }: { site: Site }) {
     "use cache";
     cacheLife("hours");
 
-    const latest = await postService.getPostIndexLatest(site.baseUrl);
+    const latest = await postService.getPostIndexLatest(site.baseUrl, site.host);
 
     return <NewsPostList posts={latest} />
 }

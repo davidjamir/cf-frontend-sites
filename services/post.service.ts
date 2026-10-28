@@ -13,13 +13,18 @@ import { NUMBER_POSTS_LATEST } from "@/constants";
 import type { Post, PostIndex } from "@/core/domain/post";
 
 export const postService = {
-  async getPostData(baseUrl: string, segment: string, slug: string) {
+  async getPostData(
+    baseUrl: string,
+    domain: string,
+    segment: string,
+    slug: string,
+  ) {
     "use cache";
     cacheLife("max");
     cacheTag(`post-data:${baseUrl}/${segment}/${slug}`);
 
     try {
-      const searchParams = new URLSearchParams({ segment, slug });
+      const searchParams = new URLSearchParams({ host: domain, segment, slug });
 
       const request = new Request(
         `${baseUrl}/api/post?${searchParams.toString()}`,
@@ -112,13 +117,16 @@ export const postService = {
     }
   },
 
-  async getPostIndexLatest(baseUrl: string) {
+  async getPostIndexLatest(baseUrl: string, domain: string) {
     "use cache";
     cacheLife("hours");
     cacheTag(`posts-index-latest:${baseUrl}`);
 
     try {
-      const request = new Request(`${baseUrl}/api/latest`, {
+      const url = new URL(`${baseUrl}/api/latest`);
+      url.searchParams.set("host", domain);
+
+      const request = new Request(url, {
         headers: { Authorization: `Bearer ${INTERNAL_SECRET}` },
       });
 

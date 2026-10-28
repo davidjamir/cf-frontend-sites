@@ -20,6 +20,7 @@ export async function GET(_: Request, { params }: Props) {
   const site = await siteService.getCurrentSite();
   const post = await postService.getPostData(
     site.baseUrl,
+    site.host,
     segment,
     `${year}/${month}/${slug}`,
   );

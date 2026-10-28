@@ -11,13 +11,16 @@ import { decryptPacket } from "@/lib/decrypt";
 import { ORIGIN_CONFIG_DEVELOPMENT_DEFAULT } from "@/constants";
 import type { Site } from "@/core/domain/site";
 
-async function fetchSite(baseUrl: string) {
+async function fetchSite(baseUrl: string, domain: string) {
   "use cache";
   cacheLife("days");
   cacheTag(`site-config:${baseUrl}`);
 
   try {
-    const request = new Request(`${baseUrl}/api/site`, {
+    const url = new URL(`${baseUrl}/api/site`);
+    url.searchParams.set("host", domain);
+
+    const request = new Request(url, {
       headers: { Authorization: `Bearer ${INTERNAL_SECRET}` },
     });
 
@@ -66,8 +69,8 @@ export const siteService = {
   },
 
   async getCurrentSite() {
-    const { url } = await this.getRequestOrigin();
-    const resultSite = await fetchSite(url);
+    const { url, host } = await this.getRequestOrigin();
+    const resultSite = await fetchSite(url, host);
 
     return resultSite;
   },
