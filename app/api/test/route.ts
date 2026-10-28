@@ -17,7 +17,6 @@ export async function GET() {
 
     const encryptedData: string = await response.text();
 
-    console.log(isCrypto);
     const result = await decryptPacket<unknown>(encryptedData, AES_SECRET_KEY);
 
     return NextResponse.json(result ?? { message: "No data returned" }, {
