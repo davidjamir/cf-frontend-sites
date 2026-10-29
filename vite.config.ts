@@ -1,8 +1,7 @@
 import { defineConfig } from "vite";
 import vinext from "vinext";
 import { cloudflare } from "@cloudflare/vite-plugin";
-import { cdnAdapter } from "@vinext/cloudflare/cache/cdn-adapter";
-// import { kvDataAdapter } from "@vinext/cloudflare/cache/kv-data-adapter";
+import { workersCacheCdnAdapter } from "@vinext/cloudflare/cache/workers-cache-cdn-adapter";
 import { imagesOptimizer } from "@vinext/cloudflare/images/images-optimizer";
 
 export default defineConfig({
@@ -10,8 +9,7 @@ export default defineConfig({
     vinext({
       images: { optimizer: imagesOptimizer() },
       cache: {
-        cdn: cdnAdapter(),
-        // data: kvDataAdapter(), // KV-backed data cache (binding: VINEXT_KV_CACHE)
+        cdn: workersCacheCdnAdapter(),
       },
     }),
     cloudflare({
