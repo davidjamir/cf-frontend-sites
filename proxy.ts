@@ -5,6 +5,7 @@ import { isValidPostPath } from "@/helpers/validatorPostPath";
 const EXACT_PATHS = new Set([
   "/",
   "/manifest.webmanifest",
+  "sw.js",
   "/network",
   "/search",
   "/api/test",
