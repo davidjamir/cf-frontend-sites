@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { isValidPostPath } from "@/helpers/validatorPostPath";
 
 const EXACT_PATHS = new Set([
   "/",
@@ -20,18 +21,16 @@ const PREFIX_PATHS = [
   "/network/",
 ];
 
-// const DYNAMIC_PATHS = [/^\/[0-9a-zA-Z]{4,10}$/];
-
 function isAllowedPath(path: string) {
   if (EXACT_PATHS.has(path)) return true;
+
+  if (path.startsWith("/post/")) {
+    return isValidPostPath(path);
+  }
 
   if (PREFIX_PATHS.some((prefix) => path.startsWith(prefix))) {
     return true;
   }
-
-  // if (DYNAMIC_PATHS.some((pattern) => pattern.test(path))) {
-  //   return true;
-  // }
 
   return false;
 }
