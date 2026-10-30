@@ -45,6 +45,11 @@
       "service": "cf-storage-redirect",
     },
   ],
+  "kv_namespaces": [
+    {
+      "binding": "VINEXT_KV_CACHE",
+    },
+  ],
   "vars": {
     "IS_CRYPTO_PAYLOAD": true,
   },
