@@ -31,10 +31,20 @@ export function isValidPostParams(
   return true;
 }
 
-export function isValidPostPath(path: string) {
+export function isValidPostPath(path: string): boolean {
   const segments = path.split("/");
 
-  if (segments.length !== 6 || segments[1] !== "post") {
+  if (segments[1] !== "post") {
+    return false;
+  }
+
+  const isPost = segments.length === 6;
+
+  const isSocialPoster =
+    segments.length === 7 &&
+    (segments[6] === "social-poster" || segments[6] === "opengraph-image");
+
+  if (!isPost && !isSocialPoster) {
     return false;
   }
 
